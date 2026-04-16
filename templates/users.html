@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+  project: MyTinyApp
+  By: Assa Paran
+  Date: 02-APR-2026
+-->
+<html>
+<head>
+<title>MyTineyApp: Users Administration</title>
+      <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"  href="{{ url_for('static', filename='css/tinyapp.css') }}">
+  <!--   <link rel="stylesheet" href="tinyapp.css"> -->
+</head>
+<body>
+{{ url_for('static', filename='css/tinyapp.css') }}
+<p>
+<h1><b>MyTinyApp</b></h1>
+</p>
+<table>
+<tr>
+   <th style="width: 20%;">Username</th>
+   <th style="width: 30%;">Name</th>
+   <th style="width: 30%;">email</th>
+   <th style="width: 30%;">Description</th>
+    <th style="width: 30%;">Password</th>
+   <th style="width: 15%;">Actions</th>
+   <th style="width: 15%;">Delete</th>
+</tr>
+{% for user in users %}
+<tr>
+    <form method="POST" action="">
+    <td>
+        <input type="text"  class="input_text_without_borders" id = "username"  name="username" value="{{ user['username'] }}">
+        Admin:<input type="text"  class="input_text_without_borders" id = "admin"  name="admin" size =2 value="{{ user['admin'] }}">
+    </td>
+    <td>
+        <input type="text"  class="input_text_without_borders" id = "name"  name="name" value="{{ user['name'] }}">
+    </td>
+    <td>
+        <input type="text"  class="input_text_without_borders" id = "email"  name="email" value="{{ user['email'] }}">
+    </td>
+    <td>
+        <input type="text"  class="input_text_without_borders" id = "desc"  name="desc" value="{{ user['description'] }}">
+    </td>
+   <td>
+        <input type="password"  class="input_text_without_borders" id = "pwd"  name="pwd" value="*****">
+    </td>
+
+    <td>
+         <button type="submit"  name="add_user_rec_btn" formaction="/users/add">Add</button>
+        <button type="submit"  name="update_user_rec_btn" formaction="/users/update?username={{ user['username'] }}">Update</button>
+    </td>
+    <td>
+        <button type="submit"  name="delete_user_rec_btn" formaction="/users/delete?username={{ user['username'] }}">Delete</button>
+        <a href="/users/delete?username={{ user['username'] }}" >Delete</a>
+    </td>
+    </form>
+</tr>
+{% endfor %}
+</table>
+<h2>Actions: Add , Update , Search</h2>
+<form method="POST" action="/users/add">
+    <label for="username">User name:</label>
+    <input type="text" id = "username" name="username" placeholder="user Name">
+    <input type="text" id = "admin"    name="admin" size= 2 value="N">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="Name">
+    <label for="email">email:</label>
+    <input type="email" id="email" name="email" placeholder="Email"><br>
+    <input type="text"  id = "desc"  name="desc" placeholder="user description"">
+    <input type="password"  id = "pwd"  name="pwd" placeholder="*****"><br><br>
+    <button type="submit"  name="add_user_btn">Add User</button>
+    <button type="submit"  name="update_user_btn" formaction="/users/update">Update User</button>
+    <button type="submit"  name="search_user_btn" formaction="/users/search">Search user</button><br>
+</form>
+<h2>Delete User</h2>
+<form method="POST" action="/users/delete">
+<input type="text" name="username" placeholder="user Name">
+<button type="submit">Delete User</button>
+</body>
+</html>

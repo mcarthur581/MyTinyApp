@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--
+  project: MyTinyApp
+  By: Assa Paran
+  Date: 02-APR-2026
+-->
+<html>
+<head> 
+<title>MyTineyApp</title>
+  <link rel="stylesheet"  href="{{ url_for('static', filename='css/tinyapp.css') }}">
+  <!--   <link rel="stylesheet" href="tinyapp.css"> -->
+<style>
+</style>
+</head>
+<p>
+<h1><b>MyTinyApp</b></h1>
+</p>
+<h1>login</h1>
+<form method="POST" action="/login">
+    <label for="username">User name:</label>
+    <input type="text"  id = "username"  name="username" placeholder="user name"><br><br>
+    <label for="pwd">Password:</label>
+    <input type="password"  id = "pwd"  name="pwd" placeholder="*****"><br><br>
+    <button type="submit"  name="login_btn">Login</button><br>
+</form>
+</body>
+</html>

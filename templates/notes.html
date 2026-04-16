@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+  project: MyTinyApp
+  By: Assa Paran
+  Date: 02-APR-2026
+-->
+<html lang="en">
+<head>
+<title>MyTineyApp: Notes</title>
+  <link rel="stylesheet"  href="{{ url_for('static', filename='css/tinyapp.css') }}">
+  <!--   <link rel="stylesheet" href="tinyapp.css"> -->
+   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="tinyapp.css">
+<title>MyTineyApp</title>
+<style>
+table ,th,td {
+  border: 1px solid black;
+  }
+/* input[type="text"] */
+.input_text_without_borders
+{
+    border: none;    /* Removes the standard border */
+    outline: none;   /* Removes the blue/orange glow on focus */
+}
+</style>
+</head>>
+<body>
+<table>
+<tr>
+   <th style="width: 10px;">Username</th>
+   <th style="width: 15px;">Note ID</th>
+   <th style="width: 600px;">Note</th>
+   <th style="width: 15%;">Actions</th>
+   <th style="width: 15%;">Delete</th>
+</tr>
+{% for note in notes %}
+<tr>
+    <form method="POST" action="">
+    <td>
+        username
+    </td>
+    <td>
+        <input type="text"  class="input_text_without_borders" id = "note_id"  name="note_id" value="{{ note['note_id'] }}">
+    </td>
+    <td>
+        Title: <input type="text"  class="input_text_without_borders" id = "title"  name="title" value="{{ note['title'] }}"><br>
+        <textarea rows="10" cols="50" id="note_text"  name = "note_text">{{ note['note_text'] }}
+         </textarea>
+    </td>
+    <td>
+        <button type="submit"  name="add_user_rec_btn" formaction="/notes/add">Add</button>
+        <button type="submit"  name="update_note_rec_btn" formaction="/notes/update?note_id={{ note['note_id'] }}">Update</button>
+    </td>
+    <td>
+        <button type="submit"  name="delete_note_rec_btn" formaction="/notes/delete?note_id={{ note['note_id'] }}">Delete</button>
+        <a href="/notes/delete?note_id={{ note['note_id'] }}" >Delete</a>
+    </td>
+    </form>
+    {% endfor %}
+<tr>
+</table>
+<form method="POST" action="/notes/add">
+    Title<input type="text" id = "title" name="title" placeholder="title"><br>
+    <textarea rows="10" cols="50"  name = "note_text" id="note_text" placeholder="Your note ....">
+    </textarea><br>
+    <button type="submit"  name="add_note_btn" formaction="/notes/add">Add</button>
+    <button type="submit"  name="update_note_btn" formaction="/notes/update">Update</button>
+    <button type="submit"  name="search_note_btn" formaction="/notes/search">Search</button><br>
+</form>
+</body>
+</html>
